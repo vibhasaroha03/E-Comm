@@ -63,7 +63,25 @@ config.JWT_SECRET,
     expiresIn:config.JWT_EXPIRY
 }
 )
+},
+
+generateForgotPasswordToken:function(){
+const forgotToken = crypto.randomBytes(20).toString('hex');
+//save to DB
+this.forgotPasswordToken=crypto.createHash("sha256")
+.update(forgotToken)
+.digest("hex")
+this.forgotPasswordExpiry=Date.now()+20*60*1000
+//return values to user
+
+return forgotToken
+
 }
+
+
+
+
+
 
 }
 
